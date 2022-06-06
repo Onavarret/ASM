@@ -1,0 +1,32 @@
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 1 : Found directive in column 1. (LIST)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 11 : Found directive in column 1. (CBLOCK)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 25 : Found directive in column 1. (ENDC)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 27 : Found directive in column 1. (CBLOCK)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 34 : Found directive in column 1. (ENDC)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 37 : Found directive in column 1. (ORG)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 40 : Found directive in column 1. (ORG)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 43 : Found directive in column 1. (ORG)
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 48 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 50 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 54 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 60 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 68 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 95 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 97 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 99 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 101 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 109 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 117 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 198 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 207 : Found opcode in column 1. (RETFIE)
+Warning[203] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 230 : Found opcode in column 1. (RETURN)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/main.asm 234 : Found directive in column 1. (INCLUDE)
+Message[305] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/LCD.inc 318 : Using default destination of 1 (file).
+Message[305] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/LCD.inc 328 : Using default destination of 1 (file).
+Message[305] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/LCD.inc 338 : Using default destination of 1 (file).
+Message[305] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/LCD.inc 347 : Using default destination of 1 (file).
+Message[305] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/LCD.inc 357 : Using default destination of 1 (file).
+Message[305] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/LCD.inc 367 : Using default destination of 1 (file).
+Message[305] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/LCD.inc 376 : Using default destination of 1 (file).
+Warning[202] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/LCD.inc 383 : Argument out of range.  Least significant bits used.
+Message[305] /home/omars/MPLABXProjects/PIC16F887/Interrupt_Clear_LCD.X/LCD.inc 387 : Using default destination of 1 (file).
