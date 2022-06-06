@@ -1,0 +1,15 @@
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/A1_Semaforo.X/Main.asm 1 : Found directive in column 1. (LIST)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/A1_Semaforo.X/Main.asm 20 : Found directive in column 1. (ENDC)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/A1_Semaforo.X/Main.asm 23 : Found directive in column 1. (ORG)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/A1_Semaforo.X/Main.asm 26 : Found directive in column 1. (ORG)
+Message[302] /home/omars/MPLABXProjects/PIC16F887/A1_Semaforo.X/Main.asm 31 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/A1_Semaforo.X/Main.asm 33 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/A1_Semaforo.X/Main.asm 36 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] /home/omars/MPLABXProjects/PIC16F887/A1_Semaforo.X/Main.asm 94 : Using default destination of 1 (file).
+Message[305] /home/omars/MPLABXProjects/PIC16F887/A1_Semaforo.X/Main.asm 105 : Using default destination of 1 (file).
+Message[305] /home/omars/MPLABXProjects/PIC16F887/A1_Semaforo.X/Main.asm 115 : Using default destination of 1 (file).
+Message[305] /home/omars/MPLABXProjects/PIC16F887/A1_Semaforo.X/Main.asm 125 : Using default destination of 1 (file).
+Message[305] /home/omars/MPLABXProjects/PIC16F887/A1_Semaforo.X/Main.asm 135 : Using default destination of 1 (file).
+Message[305] /home/omars/MPLABXProjects/PIC16F887/A1_Semaforo.X/Main.asm 145 : Using default destination of 1 (file).
+Message[305] /home/omars/MPLABXProjects/PIC16F887/A1_Semaforo.X/Main.asm 155 : Using default destination of 1 (file).
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/A1_Semaforo.X/Main.asm 165 : Found directive in column 1. (END)
