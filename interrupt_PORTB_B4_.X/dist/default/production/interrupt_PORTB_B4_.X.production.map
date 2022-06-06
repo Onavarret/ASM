@@ -1,0 +1,78 @@
+MPLINK 5.09, LINKER
+Linker Map File - Created Mon Jun 06 13:05:37 2022
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000002
+                   .cinit    romdata   0x000001    program   0x000004
+                   .org_1       code   0x000004    program   0x000002
+                   .org_2       code   0x000005    program   0x000160
+.config_2007_BUILD/DEFAULT/PRODUCTION/MAIN.O       code   0x002007    program   0x000002
+.config_2008_BUILD/DEFAULT/PRODUCTION/MAIN.O       code   0x002008    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000002      
+                            0x000004    0x0000b4      
+                            0x002007    0x002008      
+            182 out of 8455 program addresses used, program memory utilization is 2%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    BUCLE   0x000045    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\main.asm
+            CLEAR_COUNTER   0x00006d    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\main.asm
+                   D100ms   0x000091    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                   D100us   0x00007a    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                     D1ms   0x000089    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                      D1s   0x0000a9    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                   D300ms   0x0000b1    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                   D500ms   0x000099    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                   D500us   0x000081    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                   D700ms   0x0000a1    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+               Delay100ms   0x00008d    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+               Delay100us   0x000076    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                 Delay1ms   0x000085    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                  Delay1s   0x0000a5    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+               Delay300ms   0x0000ad    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+               Delay500ms   0x000095    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+               Delay500us   0x00007d    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+               Delay700ms   0x00009d    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                   INICIO   0x000005    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\main.asm
+               INTERRUP_B   0x000050    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\main.asm
+                SALIR_INT   0x000064    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\main.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   INICIO   0x000005    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\main.asm
+                    BUCLE   0x000045    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\main.asm
+               INTERRUP_B   0x000050    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\main.asm
+                SALIR_INT   0x000064    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\main.asm
+            CLEAR_COUNTER   0x00006d    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\main.asm
+               Delay100us   0x000076    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                   D100us   0x00007a    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+               Delay500us   0x00007d    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                   D500us   0x000081    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                 Delay1ms   0x000085    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                     D1ms   0x000089    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+               Delay100ms   0x00008d    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                   D100ms   0x000091    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+               Delay500ms   0x000095    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                   D500ms   0x000099    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+               Delay700ms   0x00009d    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                   D700ms   0x0000a1    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                  Delay1s   0x0000a5    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                      D1s   0x0000a9    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+               Delay300ms   0x0000ad    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+                   D300ms   0x0000b1    program     static Z:\PIC16F887\interrupt_PORTB_B4_.X\Delays.inc
+
+

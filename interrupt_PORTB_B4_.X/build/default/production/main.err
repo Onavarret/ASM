@@ -1,0 +1,75 @@
+Warning[205] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 1 : Found directive in column 1. (LIST)
+Warning[205] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 12 : Found directive in column 1. (CBLOCK)
+Warning[205] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 16 : Found directive in column 1. (ENDC)
+Warning[205] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 20 : Found directive in column 1. (ORG)
+Warning[205] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 23 : Found directive in column 1. (ORG)
+Warning[205] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 26 : Found directive in column 1. (ORG)
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 32 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 35 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 39 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 43 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 51 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 68 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 84 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 85 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 86 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 87 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 88 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 89 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 92 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 96 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 100 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 108 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 116 : Using default destination of 1 (file).
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 116 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 119 : Found opcode in column 1. (GOTO)
+Warning[205] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 123 : Found directive in column 1. (BANKSEL)
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 124 : Found opcode in column 1. (BCF)
+Warning[205] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 126 : Found directive in column 1. (BANKSEL)
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 127 : Found opcode in column 1. (BTFSC)
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 128 : Found opcode in column 1. (GOTO)
+Warning[205] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 131 : Found directive in column 1. (BANKSEL)
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 132 : Found opcode in column 1. (DECFSZ)
+Message[305] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 132 : Using default destination of 1 (file).
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 132 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 133 : Found opcode in column 1. (GOTO)
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 134 : Found opcode in column 1. (MOVLW)
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 135 : Found opcode in column 1. (MOVWF)
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 135 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[205] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 136 : Found directive in column 1. (BANKSEL)
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 137 : Found opcode in column 1. (INCF)
+Message[305] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 137 : Using default destination of 1 (file).
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 137 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 138 : Found opcode in column 1. (MOVF)
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 138 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[205] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 139 : Found directive in column 1. (BANKSEL)
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 140 : Found opcode in column 1. (MOVWF)
+Warning[205] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 152 : Found directive in column 1. (BANKSEL)
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 153 : Found opcode in column 1. (BSF)
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 154 : Found opcode in column 1. (BCF)
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 155 : Found opcode in column 1. (BSF)
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 156 : Found opcode in column 1. (BSF)
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 157 : Found opcode in column 1. (BSF)
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 158 : Found opcode in column 1. (BCF)
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 159 : Found opcode in column 1. (RETFIE)
+Warning[205] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 162 : Found directive in column 1. (BANKSEL)
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 163 : Found opcode in column 1. (MOVLW)
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 164 : Found opcode in column 1. (MOVWF)
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 164 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[205] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 165 : Found directive in column 1. (BANKSEL)
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 166 : Found opcode in column 1. (MOVLW)
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 167 : Found opcode in column 1. (MOVWF)
+Message[302] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 167 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 169 : Found opcode in column 1. (GOTO)
+Warning[205] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\MAIN.ASM 176 : Found directive in column 1. (INCLUDE)
+Warning[205] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\DELAYS.INC 1 : Found directive in column 1. (CBLOCK)
+Warning[205] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\DELAYS.INC 10 : Found directive in column 1. (ENDC)
+Message[305] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\DELAYS.INC 18 : Using default destination of 1 (file).
+Message[305] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\DELAYS.INC 29 : Using default destination of 1 (file).
+Message[305] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\DELAYS.INC 39 : Using default destination of 1 (file).
+Message[305] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\DELAYS.INC 49 : Using default destination of 1 (file).
+Message[305] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\DELAYS.INC 59 : Using default destination of 1 (file).
+Message[305] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\DELAYS.INC 69 : Using default destination of 1 (file).
+Message[305] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\DELAYS.INC 79 : Using default destination of 1 (file).
+Message[305] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\DELAYS.INC 89 : Using default destination of 1 (file).
+Warning[205] Z:\PIC16F887\INTERRUPT_PORTB_B4_.X\DELAYS.INC 93 : Found directive in column 1. (END)
