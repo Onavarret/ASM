@@ -1,0 +1,36 @@
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/main.asm 1 : Found directive in column 1. (LIST)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/main.asm 18 : Found directive in column 1. (ORG)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/main.asm 21 : Found directive in column 1. (ORG)
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/main.asm 26 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/main.asm 28 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/main.asm 32 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/main.asm 57 : Found opcode in column 1. (GOTO)
+Warning[207] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/main.asm 61 : Found label after column 1. (SHOW_NUMBER)
+Warning[207] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/main.asm 73 : Found label after column 1. (END_CYCLE)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 1 : Found directive in column 1. (CBLOCK)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 10 : Found directive in column 1. (ENDC)
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 16 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 18 : Using default destination of 1 (file).
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 18 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 26 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 29 : Using default destination of 1 (file).
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 29 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 36 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 39 : Using default destination of 1 (file).
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 39 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 46 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 49 : Using default destination of 1 (file).
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 49 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 56 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 59 : Using default destination of 1 (file).
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 59 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 66 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 69 : Using default destination of 1 (file).
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 69 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 76 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 79 : Using default destination of 1 (file).
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 79 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 86 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 89 : Using default destination of 1 (file).
+Message[302] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 89 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/Temporizador.X/Timing.inc 96 : Found directive in column 1. (END)
