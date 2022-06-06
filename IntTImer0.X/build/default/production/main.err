@@ -1,0 +1,13 @@
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/IntTImer0.X/main.asm 1 : Found directive in column 1. (LIST)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/IntTImer0.X/main.asm 18 : Found directive in column 1. (ORG)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/IntTImer0.X/main.asm 21 : Found directive in column 1. (ORG)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/IntTImer0.X/main.asm 26 : Found directive in column 1. (ORG)
+Message[302] /home/omars/MPLABXProjects/PIC16F887/IntTImer0.X/main.asm 30 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/IntTImer0.X/main.asm 44 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/IntTImer0.X/main.asm 45 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/IntTImer0.X/main.asm 46 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/IntTImer0.X/main.asm 47 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/IntTImer0.X/main.asm 48 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/IntTImer0.X/main.asm 49 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] /home/omars/MPLABXProjects/PIC16F887/IntTImer0.X/main.asm 64 : Using default destination of 1 (file).
+Message[305] /home/omars/MPLABXProjects/PIC16F887/IntTImer0.X/main.asm 68 : Using default destination of 1 (file).
