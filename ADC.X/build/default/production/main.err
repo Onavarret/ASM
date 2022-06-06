@@ -1,0 +1,12 @@
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/ADC.X/main.asm 1 : Found directive in column 1. (LIST)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/ADC.X/main.asm 11 : Found directive in column 1. (CBLOCK)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/ADC.X/main.asm 14 : Found directive in column 1. (ENDC)
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/ADC.X/main.asm 19 : Found directive in column 1. (ORG)
+Message[302] /home/omars/MPLABXProjects/PIC16F887/ADC.X/main.asm 23 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/ADC.X/main.asm 26 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/ADC.X/main.asm 28 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/ADC.X/main.asm 31 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/ADC.X/main.asm 35 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/ADC.X/main.asm 40 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/omars/MPLABXProjects/PIC16F887/ADC.X/main.asm 54 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[205] /home/omars/MPLABXProjects/PIC16F887/ADC.X/main.asm 85 : Found directive in column 1. (END)
