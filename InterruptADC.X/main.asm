@@ -1,0 +1,110 @@
+LIST P = 16F887
+#include "p16f887.inc"
+
+; CONFIG1
+; __config 0xE0F2
+ __CONFIG _CONFIG1, _FOSC_HS & _WDTE_OFF & _PWRTE_OFF & _MCLRE_ON & _CP_OFF & _CPD_OFF & _BOREN_OFF & _IESO_OFF & _FCMEN_OFF & _LVP_OFF
+; CONFIG2
+; __config 0xFEFF
+ __CONFIG _CONFIG2, _BOR4V_BOR21V & _WRT_OFF
+ 
+ 
+CBLOCK 0X20
+ adclecturaH
+ adclecturaL
+ENDC
+ 
+
+ORG 0X0000
+    GOTO INICIO
+    
+ORG 0X0004
+    GOTO INTERRUPCION_ADC
+
+    
+ORG 0X0005
+INICIO
+    
+    BANKSEL ANSELH
+    MOVLW   0X00   ;DIGITAL 
+    MOVWF   ANSELH
+    MOVLW   0X01    ;ANALOGICO
+    MOVWF   ANSEL
+    BANKSEL TRISA
+    MOVLW   0XFF
+    MOVWF   TRISA ;PUERTO A COMO ENTRADA
+    MOVLW   0X00
+    MOVWF   TRISB   ;PUERTO B COMO SALIDA
+    MOVLW   0X00
+    MOVWF   TRISD  ;PUERTO D COMO SALIDA
+    
+       
+    ;CONFIGURACION ADC
+    BANKSEL ADCON1
+    MOVLW   0X00
+    MOVWF   ADCON1  ;LEFT JUSTIFIED / VSS VDD REFERENCE
+    BANKSEL ADCON0
+    MOVLW   0X00
+    MOVWF   ADCON0 ;FOSC/2  /  CH0 = AN0 / DISABLED
+    BSF     ADCON0, ADON  ;ENABLED
+    
+    ;HABILITACION DE LA INTERRUPCION
+    BANKSEL INTCON
+    BSF	    INTCON, GIE
+    BSF	    INTCON, PEIE
+    BANKSEL PIE1
+    BSF	    PIE1, ADIE
+    BANKSEL PIR1
+    BCF     PIR1, ADIF
+    BSF	    ADCON0, GO_DONE ;INICIA LA CONVERSION
+ 
+
+    
+BUCLE:
+    GOTO    BUCLE
+    
+    
+INTERRUPCION_ADC:
+    BANKSEL PIR1
+    BCF	    PIR1, ADIF ;LIMPIO LA BANDERA
+    BANKSEL ADRESL
+    MOVF    ADRESL, W
+    BANKSEL adclecturaL
+    MOVWF   adclecturaL
+    BANKSEL ADRESH
+    MOVF    ADRESH, W
+    BANKSEL adclecturaH
+    MOVWF   adclecturaH
+    MOVF    adclecturaH, W ;adclecturaH
+    BANKSEL PORTB
+    MOVWF   PORTB   
+    BANKSEL adclecturaL
+    MOVF    adclecturaL,W
+    BANKSEL PORTD
+    MOVWF   PORTD
+    
+    
+    BANKSEL PIE1
+    BSF     PIE1, ADIE
+    BANKSEL INTCON
+    BSF     INTCON, GIE
+    BSF	    INTCON, PEIE
+    BANKSEL ADCON0
+    BSF	    ADCON0, GO_DONE
+    RETFIE
+    
+    
+    
+
+
+	
+	
+
+;;;;;;;;;;;;;;;;;;;;;;;    
+   
+	
+END
+
+
+
+
