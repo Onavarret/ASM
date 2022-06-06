@@ -1,0 +1,1411 @@
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (LIST)
+                      00001 LIST P = 16F887
+                      00002 #include "p16f887.inc"
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ; Build date : Sep 19 2018
+                      00005 ;  MPASM PIC16F887 processor include
+                      00006 ; 
+                      00007 ;  (c) Copyright 1999-2018 Microchip Technology, All rights reserved
+                      00008 ;==========================================================================
+                      00009 
+                      00810         LIST
+                      00003 
+                      00004 
+                      00005 
+                      00006 ; CONFIG1
+                      00007 ; __config 0xE0F2
+2007   20F2           00008  __CONFIG _CONFIG1, _FOSC_HS & _WDTE_OFF & _PWRTE_OFF & _MCLRE_ON & _CP_OFF & _CPD_OFF & _BOREN_OFF & _I
+                            ESO_OFF & _FCMEN_OFF & _LVP_OFF
+                      00009 ; CONFIG2
+                      00010 ; __config 0xFEFF
+2008   3EFF           00011  __CONFIG _CONFIG2, _BOR4V_BOR21V & _WRT_OFF
+                      00012 
+                      00013     CBLOCK 0X020
+  00000020            00014        adclecturaH ;almacenar la parte alta del ADC
+  00000021            00015        adclecturaL ;almacenar la parte baja del ADC
+  00000022            00016        K  ;CONTADOR
+  00000023            00017        H ; K - 1 
+  00000024            00018        ACUM ; ACUMULADOR
+  00000025            00019        POW ;POTENCIA A ELEVAR
+  00000026            00020        TOTAL_POW_RES ;resultado total de la conversion binario a decimal
+  00000027            00021        TEST
+                      00022     ENDC
+                      00023     
+                      00024  
+                      00025  
+Warning[205]: Found directive in column 1. (ORG)
+                      00026 ORG 0X0000
+0000   2???           00027     GOTO INICIO
+                      00028     
+Warning[205]: Found directive in column 1. (ORG)
+                      00029 ORG 0X0005
+0005                  00030 INICIO
+0005   1683 1703      00031     BANKSEL ANSELH
+0007   3000           00032     MOVLW   0X00 ; SE COLOCAN COMO DIGITAL TODOS LOS CANALES HIGH
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0008   0089           00033     MOVWF   ANSELH
+0009   1683 1303      00034     BANKSEL TRISA
+000B   30FF           00035     MOVLW   0XFF
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000C   0085           00036     MOVWF   TRISA
+000D   3000           00037     MOVLW   0X00
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000E   0086           00038     MOVWF   TRISB
+000F   1683 1303      00039     BANKSEL TRISD
+0011   3000           00040     MOVLW   0X00
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0012   0088           00041     MOVWF   TRISD
+0013   1683 1303      00042     BANKSEL TRISC
+0015   3000           00043     MOVLW   0X00
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0016   0087           00044     MOVWF   TRISC
+                      00045     
+0017   1683 1703      00046     BANKSEL ANSEL
+0019   3001           00047     MOVLW   0X01 ; SE COLOCA COMO ANALOGICO EL PRIMER CANAL DEL ADC
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001A   0088           00048     MOVWF   ANSEL
+                      00049     
+                      00050     
+001B   1683 1303      00051     BANKSEL ADCON1
+001D   3030           00052     MOVLW   b'00110000'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001E   009F           00053     MOVWF   ADCON1 ;JUSTIFICADO A LA IZQUIERDA // REFERENCIAS DE VREF - VREF +
+001F   1283 1303      00054     BANKSEL ADCON0
+0021   3000           00055     MOVLW   0X00
+0022   009F           00056     MOVWF   ADCON0 ; SELECCIONAR RELOJ FOSC/2 .... CH=AN0 ..... ADON DESACTIVADO
+                      00057     
+0023   141F           00058     BSF     ADCON0, ADON ;ACTIVAMOS EL ADC
+                      00059     
+                      00060     ;;;;;;;;;;;;;;;;
+0024   1283 1303      00061     BANKSEL TEST
+0026   307B           00062     MOVLW   D'123'
+0027   00A7           00063     MOVWF   TEST
+                      00064     ;;;;;
+                      00065     
+0028   2???           00066     CALL    LCD_Init
+0029   2???           00067     CALL    LCD_Clear
+002A   3003           00068     MOVLW   0X03
+002B   2???           00069     CALL    LCD_GoTo
+002C   3027           00070     MOVLW   TEST
+002D   2???           00071     CALL    LCD_Char
+                      00072     
+                      00073     
+002E                  00074 BUCLE:  
+002E   1283 1303      00075     BANKSEL ADCON0
+0030   149F           00076     BSF     ADCON0, GO_DONE ;INICIA LA CONVERSION (GO DONE SE MANDA A CERO CUANDO LA CONVERSION SE COMPL
+                            ETA)
+0031   189F           00077     BTFSC   ADCON0, GO_DONE ;¿ESTA COMPLETA LA CONVERSIÓN?
+0032   2???           00078     GOTO    BUCLE
+0033   1683 1303      00079     BANKSEL ADRESL
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0035   081E           00080     MOVF    ADRESL,W ;MOVEMOS EL RESULTADO L AL RESGISTRO DE TRABAJO 
+0036   1283 1303      00081     BANKSEL adclecturaL
+0038   00A1           00082     MOVWF   adclecturaL
+                      00083     
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0039   1283 1303      00084     BANKSEL ADRESH
+003B   081E           00085     MOVF    ADRESH,W ;MOVEMOS EL RESULTADO H AL REGISTRO DE TRABAJO 
+003C   1283 1303      00086     BANKSEL adclecturaH
+003E   00A0           00087     MOVWF   adclecturaH
+                      00088     
+                      00089    
+                      00090     
+                      00091    
+003F   1283 1303      00092     BANKSEL K
+0041   3007           00093     MOVLW   D'7'
+0042   00A2           00094     MOVWF   K
+                      00095      
+                      00096 
+                      00097     
+Warning[207]: Found label after column 1. (Init_CONVERSION)
+0043                  00098     Init_CONVERSION:
+                      00099      
+0043   0103           00100                 CLRW
+                      00101                 ;CLRF   K
+                      00102     
+                      00103      
+Warning[207]: Found label after column 1. (CONVERSION)
+0044                  00104      CONVERSION:
+                      00105      
+0044   0822           00106                 MOVF    K,0 
+Warning[202]: Argument out of range.  Least significant bits used.
+0045   1920           00107                 BTFSC   adclecturaH,K
+0046   2025           00108                 CALL    POW
+                      00109                 ;BTFSC   adclecturaH,K
+0047   0823           00110                  MOVF    POW_RES,0
+                      00111                 ;BTFSC   adclecturaH,K
+0048   07A6           00112                 ADDWF   TOTAL_POW_RES,1
+0049   0BA2           00113                 DECFSZ    K,1   ;1 to store the result in K register instead of the working register
+004A   2???           00114                 GOTO CONVERSION
+                      00115                 
+                      00116                 ;CLRW
+                      00117      ;MOVLW '1111'  
+                      00118      ;ANDWF  K,0
+                      00119      ;BTFSC  W,0    
+                      00120      ;GOTO Init_CONVERSION
+                      00121      ;BTFSC  W,1    
+                      00122      ;GOTO Init_CONVERSION
+                      00123      ;BTFSC  W2,2    
+                      00124      ;GOTO Init_CONVERSION
+                      00125      ;BTFSS  W2,3    
+                      00126      ;GOTO Init_CONVERSION
+                      00127      
+                      00128      
+004B   1283 1303      00129       BANKSEL TOTAL_POW_RES
+004D   0826           00130       MOVF    TOTAL_POW_RES,0
+004E   1283 1303      00131       BANKSEL PORTB
+0050   0086           00132       MOVWF   PORTB
+                      00133       
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00134     
+                      00135 
+                      00136    
+                      00137     
+                      00138  
+0051   2???           00139     GOTO    BUCLE ;REGRESA A LA ETIQUETA DE BUCLE
+                      00140    
+                      00141     
+                      00142     INCLUDE <LCD.inc>
+                      00001 ;Ubicación de los pines de EN y RS en Miuva
+                      00002 #define LCD_EN   PORTC,4
+                      00003 #define LCD_RS   PORTC,5
+                      00004 
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00005 CBLOCK  0x020
+  00000020            00006         Count167us
+  00000021            00007         Count15ms
+  00000022            00008         Count1ms
+  00000023            00009         Count100us
+  00000024            00010         Count4_1ms
+  00000025            00011         Count334us
+  00000026            00012         Count668us
+  00000027            00013         NIBBLE
+  00000028            00014         Ret1  
+  00000029            00015         Ret2
+Warning[205]: Found directive in column 1. (ENDC)
+                      00016 ENDC
+                      00017  
+                      00018     
+                      00019 ;*****************************************************************************;
+                      00020 ;Ejemplo de envío de instrucción                                              ;
+                      00021 ;                                                                             ;
+                      00022 ;   RS      _________________________   1: DATOS | 0: INSTRUCCIONES           ;
+                      00023 ;                                                                             ;   
+                      00024 ;   RW      _________________________   1: LECTURA  |   0: ESCRITURA          ;
+                      00025 ;                 ___      ___                                                ;
+                      00026 ;   EN      _____/   \____/   \______   LEE EN FLANCOS DE BAJADA              ;
+                      00027 ;                                                                             ;
+                      00028 ;           _________________________                                         ;
+                      00029 ;   D7:D4   ___/_4 MSB_\/_4_LSB_\____   PARA ENVIAR LOS 8 BITS DE INSTRUCCION ;
+                      00030 ;                                       PRIMERO SE ENVIAN LOS 4 MÁS           ;
+                      00031 ;                                       SIGNIFICATIVOS Y POSTERIORMENTE LOS   ;
+                      00032 ;                                       4 MENOS SIGNIFICATIVOS                ;
+                      00033 ;                                                                             ;
+                      00034 ;*****************************************************************************;
+                      00035 ;Se carga D7:D4 de la LCD en los bits D3:D0 de Miuva    
+                      00036 
+                      00037 ;*****************************************************************************;
+                      00038 ;                                   LCD_Init                                  ;
+                      00039 ;   Inicializa la LCD, esta función se debe ejecutar antes de cualquier otra  ;
+                      00040 ;   que involucre el uso de la LCD.                                           ;
+                      00041 ;                                                                             ;
+                      00042 ;   Ejemplo de uso:                                                           ;
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00043 ;       call    LCD_Init                                                      ;
+                      00044 ;                                                                             ;
+                      00045 ;*****************************************************************************;
+                      00046 
+0052                  00047 LCD_Init    
+0052   1283 1303      00048     BANKSEL PORTC
+0054   1207           00049     BCF     LCD_EN              ;Enable = LOW
+0055   2???           00050     CALL    Delay15ms           
+0056   1283 1303      00051     BANKSEL PORTC
+0058   1287           00052     BCF     LCD_RS              ;RS = LOW
+                      00053     
+                      00054     ;Inicia secuencia de inicialización
+                      00055     ;Function set
+0059   1283 1303      00056     BANKSEL PORTC
+005B   3003           00057     MOVLW   b'00000011' ;Carga el valor del puerto D
+005C   0087           00058     MOVWF   PORTC       ;Manda el valor al puerto
+005D   1607           00059     BSF     LCD_EN      ;Activa el bit de ENABLE
+005E   2???           00060     CALL    Delay100us
+005F   1207           00061     BCF     LCD_EN
+0060   2???           00062     CALL    Delay4_1ms
+                      00063         
+                      00064     ;Function set
+0061   1283 1303      00065     BANKSEL PORTC
+0063   3003           00066     MOVLW   b'00000011'
+0064   1607           00067     BSF     LCD_EN
+0065   2???           00068     CALL    Delay100us
+0066   1207           00069     BCF     LCD_EN      ;Lee Function set
+0067   2???           00070     CALL    Delay100us
+                      00071         
+                      00072     ;Function set
+0068   1283 1303      00073     BANKSEL PORTC
+006A   3003           00074     MOVLW   b'00000011'
+006B   0087           00075     MOVWF   PORTC
+006C   1607           00076     BSF     LCD_EN
+006D   2???           00077     CALL    Delay100us
+006E   1207           00078     BCF     LCD_EN      ;Lee Function set
+006F   2???           00079     CALL    Delay4_1ms
+                      00080     
+                      00081     ;Function set
+0070   1283 1303      00082     BANKSEL PORTC
+0072   3002           00083     MOVLW   b'00000010'
+0073   0087           00084     MOVWF   PORTC
+0074   1607           00085     BSF     LCD_EN
+0075   2???           00086     CALL    Delay100us
+0076   1207           00087     BCF     LCD_EN      ;Lee Function set
+0077   2???           00088     CALL    Delay4_1ms
+                      00089         
+                      00090     ;Function set
+0078   1283 1303      00091     BANKSEL PORTC
+007A   3002           00092     movlw   b'00000010' ;MSB Función set
+007B   0087           00093     movwf   PORTC
+007C   1607           00094     bsf     LCD_EN
+007D   2???           00095     CALL    Delay100us
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+007E   1207           00096     bcf     LCD_EN      
+007F   2???           00097     CALL    Delay4_1ms
+0080   300E           00098     movlw   b'00001110' ;LSB Función set
+0081   0087           00099     movwf   PORTC
+0082   1607           00100     bsf     LCD_EN
+0083   2???           00101     CALL    Delay100us
+0084   1207           00102     bcf     LCD_EN      
+0085   2???           00103     CALL    Delay4_1ms
+                      00104         
+                      00105     ;Display off
+0086   1283 1303      00106     BANKSEL PORTC
+0088   3000           00107     movlw   b'00000000' ;MSB Funcion display
+0089   0087           00108     movwf   PORTC
+008A   1607           00109     bsf     LCD_EN
+008B   2???           00110     CALL    Delay100us
+008C   1207           00111     bcf     LCD_EN      
+008D   2???           00112     CALL    Delay4_1ms
+008E   3008           00113     movlw   b'00001000' ;LSB Funcion display
+008F   0087           00114     movwf   PORTC
+0090   1607           00115     bsf     LCD_EN
+0091   2???           00116     CALL    Delay100us
+0092   1207           00117     bcf     LCD_EN      
+0093   2???           00118     CALL    Delay4_1ms
+                      00119         
+                      00120     ;Display clear
+0094   1283 1303      00121     BANKSEL PORTC
+0096   3000           00122     movlw   b'00000000' ;MSB Funcion clear
+0097   0087           00123     movwf   PORTC
+0098   1607           00124     bsf     LCD_EN
+0099   2???           00125     CALL    Delay100us
+009A   1207           00126     bcf     LCD_EN      
+009B   2???           00127     call    Delay4_1ms
+009C   3001           00128     movlw   b'00000001' ;LSB Funcion clear
+009D   0087           00129     movwf   PORTC
+009E   1607           00130     bsf     LCD_EN
+009F   2???           00131     CALL    Delay100us
+00A0   1207           00132     bcf     LCD_EN      
+00A1   2???           00133     call    Delay4_1ms
+                      00134 
+                      00135     ;Entry mode set
+00A2   1283 1303      00136     BANKSEL PORTC
+00A4   3000           00137     movlw   b'00000000' ;MSB Funcion mode set
+00A5   0087           00138     movwf   PORTC
+00A6   1607           00139     bsf     LCD_EN
+00A7   2???           00140     call    Delay100us
+00A8   1207           00141     bcf     LCD_EN      
+00A9   2???           00142     call    Delay4_1ms
+00AA   3006           00143     movlw   b'00000110' ;LSB Funcion mode set
+00AB   0087           00144     movwf   PORTC
+00AC   1607           00145     bsf     LCD_EN
+00AD   2???           00146     call    Delay100us
+00AE   1207           00147     bcf     LCD_EN      
+00AF   2???           00148     call    Delay4_1ms
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00149         
+                      00150     ;DDRAM ACCES
+00B0   1283 1303      00151     BANKSEL PORTC
+00B2   3008           00152     movlw   b'00001000' ;MSB DDRAM Access
+00B3   0087           00153     movwf   PORTC
+00B4   1607           00154     bsf     LCD_EN
+00B5   2???           00155     call    Delay100us
+00B6   1207           00156     bcf     LCD_EN      
+00B7   2???           00157     call    Delay4_1ms
+00B8   3000           00158     movlw   b'00000000' ;LSB DDRAM Access
+00B9   0087           00159     movwf   PORTC
+00BA   1607           00160     bsf     LCD_EN
+00BB   2???           00161     call    Delay100us
+00BC   1207           00162     bcf     LCD_EN      
+00BD   2???           00163     call    Delay4_1ms
+                      00164         
+                      00165     ;Display on
+00BE   1283 1303      00166     BANKSEL PORTC
+00C0   3000           00167     movlw   b'00000000' ;MSB Display ON
+00C1   0087           00168     movwf   PORTC
+00C2   1607           00169     bsf     LCD_EN
+00C3   2???           00170     call    Delay100us
+00C4   1207           00171     bcf     LCD_EN      
+00C5   2???           00172     call    Delay4_1ms
+00C6   300C           00173     movlw   b'00001100' ;LSB Display ON
+00C7   0087           00174     movwf   PORTC
+00C8   1607           00175     bsf     LCD_EN
+00C9   2???           00176     call    Delay100us
+00CA   1207           00177     bcf     LCD_EN      
+00CB   2???           00178     call    Delay4_1ms
+                      00179         
+00CC   0008           00180     return
+                      00181     
+                      00182 ;*****************************************************************************;
+                      00183 ;   Ejemplo de envío del caracter H
+                      00184 ;   Ubicación del caracter H: 0100 1000
+                      00185 ;   Se tiene que enviar primero 0100 y posteriormente 1000
+                      00186 ;   1. NIBBLE almacena el valor 0100 1000
+                      00187 ;   2. Intercambia los nibbles y los almacena en W -> W = 0100 
+                      00188 ;   3. Realiza una AND con 0x0F para tener solamente 4 bits
+                      00189 ;       W = 0000 0100
+                      00190 ;   4. Le suma 00100000 para habilitar RS como datos -> W = 0010 0100
+                      00191 ;   5. Se envía a la LCD (PUERTO D)
+                      00192 ;   6. Mueve al registro de trabajo la variable NIBBLE -> W = 0100 1000
+                      00193 ;   7. Realiza una AND con 0x0F para tener solamente 4 bits
+                      00194 ;       W = 0000 1000
+                      00195 ;   8. Le suma 00100000 para habilitar RS como datos -> W = 0010 1000
+                      00196 ;   9. Se envía a la LCD (PUERTO D)
+                      00197 ;******************************************************************************;
+                      00198     
+                      00199 ;*****************************************************************************;
+                      00200 ;                                   LCD_Char                                  ;
+                      00201 ;   Imprime cualquier caracter en la posición actual de la LCD.               ;
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00202 ;                                                                             ;
+                      00203 ;   Ejemplo de uso:                                                           ;
+                      00204 ;       movlw   'H'             ;Caracter a escribir                          ;
+                      00205 ;       call    LCD_Char                                                      ;
+                      00206 ;                                                                             ;
+                      00207 ;*****************************************************************************;
+00CD                  00208 LCD_Char
+00CD   1283 1303      00209     BANKSEL PORTC
+00CF   1687           00210     bsf     LCD_RS      ;Se enviará un dato
+00D0   00A7           00211     movwf   NIBBLE      ;Almacenamos el valor en la variable NIBBLE
+00D1   0E27           00212     swapf   NIBBLE,w    ;Intercambia los NIBBLE
+00D2   390F           00213     andlw   0x0F        ;AND con 0x0F
+00D3   3E20           00214     addlw   b'00100000' ;Suma 00100000
+00D4   0087           00215     movwf   PORTC       ;Se envía al puerto D
+00D5   1607           00216     bsf     LCD_EN      ;ENABLE = HIGH
+00D6   2???           00217     call    Delay100us
+00D7   1207           00218     bcf     LCD_EN      ;ENABLE = LOW
+00D8   2???           00219     call    Delay4_1ms
+00D9   0827           00220     movf    NIBBLE,w    ;Mueve la variable NIBBLE a W
+00DA   390F           00221     andlw   0x0F        ;AND con 0x0F
+00DB   3E20           00222     addlw   b'00100000' ;Suma 00100000
+00DC   0087           00223     movwf   PORTC       ;Se envía al puerto D
+00DD   1607           00224     bsf     LCD_EN      ;ENABLE = HIGH
+00DE   2???           00225     call    Delay100us
+00DF   1207           00226     bcf     LCD_EN      ;ENABLE = LOW
+00E0   2???           00227     call    Delay4_1ms
+00E1   0008           00228     return      
+                      00229     
+                      00230 ;*****************************************************************************;
+                      00231 ;                                   LCD_Clear                                 ;
+                      00232 ;   Limpia todo lo que está escrito en la LCD y posteriormente regresa el     ;
+                      00233 ;   cursor a Home.
+                      00234 ;                                                                             ;
+                      00235 ;   Ejemplo de uso:                                                           ;
+                      00236 ;       call    LCD_Clear                                                     ;
+                      00237 ;                                                                             ;
+                      00238 ;*****************************************************************************;
+00E2                  00239 LCD_Clear
+00E2   1283 1303      00240     BANKSEL     PORTC
+00E4   1287           00241     bcf         LCD_RS
+00E5   3000           00242     movlw       b'00000000'
+00E6   0087           00243     movwf       PORTC
+00E7   1607           00244     bsf         LCD_EN
+00E8   2???           00245     call        Delay100us
+00E9   1207           00246     bcf         LCD_EN  
+00EA   2???           00247     call        Delay4_1ms
+00EB   3001           00248     movlw       b'00000001'
+00EC   0087           00249     movwf       PORTC
+00ED   1607           00250     bsf         LCD_EN
+00EE   2???           00251     call        Delay100us
+00EF   1207           00252     bcf         LCD_EN  
+00F0   2???           00253     call        Delay4_1ms
+00F1   0008           00254     return
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00255     
+                      00256 ;*****************************************************************************;
+                      00257 ;                                   LCD_Home                                  ;
+                      00258 ;   Envia el cursor a la posición inicial de la LCD                           ;
+                      00259 ;                                                                             ;
+                      00260 ;   Ejemplo de uso:                                                           ;
+                      00261 ;       call    LCD_Home                                                      ;
+                      00262 ;                                                                             ;
+                      00263 ;*****************************************************************************;
+00F2                  00264 LCD_Home
+00F2   1283 1303      00265     BANKSEL     PORTC
+00F4   1287           00266     bcf         LCD_RS
+00F5   3000           00267     movlw       b'00000000'
+00F6   0087           00268     movwf       PORTC
+00F7   1607           00269     bsf         LCD_EN
+00F8   2???           00270     call        Delay100us
+00F9   1207           00271     bcf         LCD_EN  ;Lee Function set
+00FA   2???           00272     call        Delay4_1ms
+00FB   3002           00273     movlw       b'00000010'
+00FC   0087           00274     movwf       PORTC
+00FD   1607           00275     bsf         LCD_EN
+00FE   2???           00276     call        Delay100us
+00FF   1207           00277     bcf         LCD_EN  ;Lee Function set
+0100   2???           00278     call        Delay4_1ms
+0101   0008           00279     return
+                      00280    
+                      00281 ;*****************************************************************************;
+                      00282 ;                                   LCD_GoTo                                  ;
+                      00283 ;   Inicializa la LCD, esta función se debe ejecutar antes de cualquier otra  ;
+                      00284 ;   que involucre el uso de la LCD.                                           ;
+                      00285 ;                                                                             ;
+                      00286 ;   Ejemplo de uso:                                                           ;
+                      00287 ;       movlw   0x03        ;Posición de la LCD                               ;
+                      00288 ;       call    LCD_GoTo                                                      ;
+                      00289 ;                                                                             ;
+                      00290 ;*****************************************************************************;
+                      00291 ;                       POSICIONES DE LA LCD 2X16                             ;
+                      00292 ;                                                                             ;
+                      00293 ;          00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F                    ;
+                      00294 ;          40 41 42 43 44 45 46 47 48 49 4A 4B 4C 4D 4E 4F                    ;
+                      00295 ;                                                                             ;
+                      00296 ;*****************************************************************************;
+0102                  00297 LCD_GoTo
+0102   1283 1303      00298     BANKSEL PORTC
+0104   1287           00299     bcf     LCD_RS
+0105   00A7           00300     movwf   NIBBLE
+0106   0E27           00301     swapf   NIBBLE,w
+0107   390F           00302     andlw   0x0F
+0108   3E08           00303     addlw   b'00001000'  ;FUNCION DDRAM
+0109   0087           00304     movwf   PORTC
+010A   1607           00305     bsf     LCD_EN
+010B   2???           00306     call    Delay100us
+010C   1207           00307     bcf     LCD_EN      ;Lee Function set
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+010D   2???           00308     call    Delay4_1ms
+010E   0827           00309     movf    NIBBLE,w
+010F   390F           00310     andlw   0x0F
+0110   0087           00311     movwf   PORTC
+0111   1607           00312     bsf     LCD_EN
+0112   2???           00313     call    Delay100us
+0113   1207           00314     bcf     LCD_EN      ;Lee Function set
+0114   2???           00315     call    Delay4_1ms
+0115   0008           00316     return
+                      00317 
+                      00318 ;*****************************************************************************;
+                      00319 ;                       Funciones de retardos                                 ;
+                      00320 ;*****************************************************************************;
+0116                  00321 Delay167us:
+0116   1283 1303      00322         banksel Count167us
+0118   30A7           00323         movlw   D'167'
+0119   00A0           00324         movwf   Count167us
+011A                  00325 D167us:
+Message[305]: Using default destination of 1 (file).
+011A   0BA0           00326         decfsz  Count167us
+011B   2???           00327         goto    D167us
+011C   0008           00328         return
+                      00329         
+011D                  00330 Delay334us:
+011D   1283 1303      00331         banksel Count334us
+011F   3002           00332         movlw   D'2'
+0120   00A5           00333         movwf   Count334us
+0121                  00334 D334us:
+0121   2???           00335         call    Delay167us
+Message[305]: Using default destination of 1 (file).
+0122   0BA5           00336         decfsz  Count334us
+0123   2???           00337         goto    D334us
+0124   0008           00338         return
+                      00339 
+0125                  00340 Delay4_1ms:
+0125   1283 1303      00341         banksel Count4_1ms
+0127   300D           00342         movlw   D'13'
+0128   00A4           00343         movwf   Count4_1ms
+0129                  00344 D4_1ms:
+0129   2???           00345         call    Delay334us
+Message[305]: Using default destination of 1 (file).
+012A   0BA4           00346         decfsz  Count4_1ms
+012B   2???           00347         goto    D4_1ms
+012C   0008           00348         return
+                      00349 
+012D                  00350 Delay100us:
+012D   1283 1303      00351         banksel Count100us
+012F   3064           00352         movlw   D'100'
+0130   00A3           00353         movwf   Count100us
+0131                  00354 D100us:
+Message[305]: Using default destination of 1 (file).
+0131   0BA3           00355         decfsz  Count100us
+0132   2???           00356         goto    D100us
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0133   0008           00357         return
+                      00358 
+0134                  00359 Delay1ms:
+0134   1283 1303      00360         banksel Count1ms
+0136   3003           00361         movlw   D'3'
+0137   00A2           00362         movwf   Count1ms
+0138                  00363 D1ms:
+0138   2???           00364         call    Delay334us
+Message[305]: Using default destination of 1 (file).
+0139   0BA2           00365         decfsz  Count1ms
+013A   2???           00366         goto    D1ms
+013B   0008           00367         return
+                      00368 
+013C                  00369 Delay15ms:
+013C   1283 1303      00370         banksel Count15ms
+013E   300F           00371         movlw   D'15'
+013F   00A1           00372         movwf   Count15ms
+0140                  00373 D15ms:
+0140   2???           00374         call    Delay1ms
+Message[305]: Using default destination of 1 (file).
+0141   0BA1           00375         decfsz  Count15ms
+0142   2???           00376         goto    D15ms
+0143   0008           00377         return
+                      00378         
+0144                  00379 Delay668us:
+0144   1283 1303      00380         banksel Count668us
+0146   3002           00381         movlw   D'2'
+0147   00A6           00382         movwf   Count668us
+0148                  00383 D668us:
+Message[305]: Using default destination of 1 (file).
+0148   0BA6           00384         decfsz  Count668us
+0149   2???           00385         goto    D334us
+014A   0008           00386         return
+                      00387     
+                      00388 
+                      00389     
+                      00390     
+                      00391    ; END
+                      00392 
+                      00393 
+                      00394 
+                      00395 
+                      00143     INCLUDE <MUL.inc>
+                      00001 ;PARAMETER (N1, MULTIPLIER)
+                      00002 ;RETURN MULTI ; RESULT OF N1 ADDED MULTIPLIER TIMES
+                      00003 
+                      00004     
+                      00005 
+                      00006 
+                      00007     
+                      00008     
+014B                  00009 MULTIPLICATION:
+                      00010     
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00011                 CBLOCK  0X020
+  00000020            00012                 N1    ;FIRST CONSTANT OF THE MULTIPLICATION
+  00000021            00013                 MULTIPLIER  ;TIMES THAT CONSTANT IS GOING TO BE ADDED
+  00000022            00014                 MULTI ;VARIABLE WHERE RESULT IS GOING TO BE PLACED
+                      00015                 ENDC
+                      00016         
+                      00017                 ;;;;;;;;;;;;;;;;;
+                      00018                 
+014B   1283 1303      00019                 BANKSEL MULTI
+014D   01A2           00020                 CLRF    MULTI     ;CLEAR REGISTER
+014E   0103           00021                 CLRW              ;CLEAR WORKIGN REGISTER
+014F                  00022 BUCLE_MUL:
+014F   1283 1303      00023                 BANKSEL N1
+0151   0720           00024                 ADDWF   N1,0
+0152   1283 1303      00025                 BANKSEL MULTI
+0154   00A2           00026                 MOVWF   MULTI
+                      00027                 ;BANKSEL MULTIPLIER
+Message[305]: Using default destination of 1 (file).
+0155   0BA1           00028                 DECFSZ  MULTIPLIER
+                      00029                 
+0156   2???           00030                 GOTO    BUCLE_MUL
+                      00031                 
+0157   0008           00032                 RETURN
+                      00033                 
+                      00034                 
+                      00035 ;END
+                      00144     INCLUDE <POW.inc> 
+                      00001 ;PARAMETERS (BASE, EXPONENT)
+                      00002 ;RETURN POW_RES
+                      00003     
+                      00004 
+                      00005         
+                      00006         
+0158                  00007 P0W:
+                      00008     
+                      00009     CBLOCK      0X020
+  00000020            00010         BASE ;VALOR INICIAL BASE 2 
+  00000021            00011         EXPONENT;POTEANCIA A ELEVAR
+  00000022            00012         EXPONENTFIX ;POTENCIA A ELEVAR -1
+  00000023            00013         POW_RES
+                      00014     ENDC
+                      00015         
+0158   1283 1303      00016     BANKSEL     BASE    
+015A   3002           00017     MOVLW       D'2'
+015B   00A0           00018     MOVWF       BASE
+                      00019 
+015C   1283 1303      00020     BANKSEL POW_RES
+015E   3000           00021     MOVLW       D'0'
+015F   00A3           00022     MOVWF       POW_RES
+                      00023     ;;;;;;;;;;;;;
+                      00024         
+0160   01A3           00025     CLRF    POW_RES
+0161   1283 1303      00026     BANKSEL EXPONENT
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0163   00A1           00027     MOVWF   EXPONENT
+0164   0821           00028     MOVF    EXPONENT,0 ;MOVE EXPONENT VALUE TO WORKING REGISTER
+0165   1283 1303      00029     BANKSEL EXPONENTFIX
+0167   00A2           00030     MOVWF   EXPONENTFIX ;MOVE WORKING REGISTER TO EXPONENT FIX
+0168   03A2           00031     DECF    EXPONENTFIX,1 ;DECREMENT THE VALUE OF EXPONENTFIX BY ONE 
+0169   0822           00032     MOVF    EXPONENTFIX,0
+016A   1283 1303      00033     BANKSEL MULTIPLIER    ;DANDO VALOR AL MULTIPLICADOR
+016C   3002           00034     MOVLW   D'2'    ; DEPENDIENDO DEL EXPONENTFIX 
+016D   00A1           00035     MOVWF   MULTIPLIER
+016E   1283 1303      00036     BANKSEL N1     ;ARGUMENTO MULTIPLICANDO PARA LA FUNCION MUL
+0170   0820           00037     MOVF    BASE,0
+0171   00A0           00038     MOVWF   N1      ;AL MULTIPLICANDO LE DAMOS EL VALOR DE LA BASE '2'
+                      00039     
+0172                  00040 BUCLE_POW:    
+0172   2???           00041     CALL    MULTIPLICATION
+0173   1283 1303      00042     BANKSEL MULTI
+0175   0822           00043     MOVF    MULTI,0
+0176   1283 1303      00044     BANKSEL N1
+0178   00A0           00045     MOVWF   N1
+0179   0BA2           00046     DECFSZ  EXPONENTFIX,1
+017A   2???           00047     GOTO    BUCLE_POW
+                      00048     
+017B   1283 1303      00049     BANKSEL MULTI
+017D   0822           00050     MOVF    MULTI,0
+017E   1283 1303      00051     BANKSEL POW_RES
+0180   00A3           00052     MOVWF   POW_RES
+                      00053     
+0181   0008           00054     RETURN
+                      00055     
+                      00056 
+                      00057     
+                      00058     
+                      00059     
+                      00060     
+                      00061 ;END
+                      00062 
+                      00063         
+                      00064         
+                      00065         
+                      00066 
+                      00067 
+                      00145   
+                      00146 
+                      00147 
+                      00148         
+Warning[205]: Found directive in column 1. (END)
+20F2 3EFF             00149 END
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ABDEN                             00000000
+ABDOVF                            00000007
+ACKDT                             00000005
+ACKEN                             00000004
+ACKSTAT                           00000006
+ACUM                              00000024
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000006
+ADCS1                             00000007
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS10                             00000002
+ANS11                             00000003
+ANS12                             00000004
+ANS13                             00000005
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANS5                              00000005
+ANS6                              00000006
+ANS7                              00000007
+ANS8                              00000000
+ANS9                              00000001
+ANSEL                             00000188
+ANSELH                            00000189
+BASE                              00000020
+BAUDCTL                           00000187
+BCLIE                             00000003
+BCLIF                             00000003
+BF                                00000000
+BRG0                              00000000
+BRG1                              00000001
+BRG10                             00000002
+BRG11                             00000003
+BRG12                             00000004
+BRG13                             00000005
+BRG14                             00000006
+BRG15                             00000007
+BRG16                             00000003
+BRG2                              00000002
+BRG3                              00000003
+BRG4                              00000004
+BRG5                              00000005
+BRG6                              00000006
+BRG7                              00000007
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+BRG8                              00000000
+BRG9                              00000001
+BRGH                              00000002
+BUCLE                             0000002E
+BUCLE_MUL                         0000014F
+BUCLE_POW                         00000172
+C                                 00000000
+C1CH0                             00000000
+C1CH1                             00000001
+C1IE                              00000005
+C1IF                              00000005
+C1OE                              00000005
+C1ON                              00000007
+C1OUT                             00000006
+C1POL                             00000004
+C1R                               00000002
+C1RSEL                            00000005
+C1SEN                             00000005
+C2CH0                             00000000
+C2CH1                             00000001
+C2IE                              00000006
+C2IF                              00000006
+C2OE                              00000005
+C2ON                              00000007
+C2OUT                             00000006
+C2POL                             00000004
+C2R                               00000002
+C2REN                             00000004
+C2RSEL                            00000004
+C2SYNC                            00000000
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2CON                           0000001D
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+CCP2M3                            00000003
+CCP2X                             00000005
+CCP2Y                             00000004
+CCPR1                             00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CCPR2                             0000001B
+CCPR2H                            0000001C
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CCPR2L                            0000001B
+CHS0                              00000002
+CHS1                              00000003
+CHS2                              00000004
+CHS3                              00000005
+CKE                               00000006
+CKP                               00000004
+CM1CON0                           00000107
+CM2CON0                           00000108
+CM2CON1                           00000109
+CONVERSION                        00000044
+CREN                              00000004
+CSRC                              00000007
+Count100us                        00000023
+Count15ms                         00000021
+Count167us                        00000020
+Count1ms                          00000022
+Count334us                        00000025
+Count4_1ms                        00000024
+Count668us                        00000026
+D                                 00000005
+D100us                            00000131
+D15ms                             00000140
+D167us                            0000011A
+D1ms                              00000138
+D334us                            00000121
+D4_1ms                            00000129
+D668us                            00000148
+DATA_ADDRESS                      00000005
+DC                                00000001
+DC1B0                             00000004
+DC1B1                             00000005
+DC2B0                             00000004
+DC2B1                             00000005
+D_A                               00000005
+D_NOT_A                           00000005
+Delay100us                        0000012D
+Delay15ms                         0000013C
+Delay167us                        00000116
+Delay1ms                          00000134
+Delay334us                        0000011D
+Delay4_1ms                        00000125
+Delay668us                        00000144
+ECCPAS                            0000009C
+ECCPAS0                           00000004
+ECCPAS1                           00000005
+ECCPAS2                           00000006
+ECCPASE                           00000007
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDAT                             0000010C
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+EXPONENT                          00000021
+EXPONENTFIX                       00000022
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+FVREN                             00000000
+GCEN                              00000007
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+H                                 00000023
+HTS                               00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+INDF                              00000000
+INICIO                            00000005
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOCB                              00000096
+IOCB0                             00000000
+IOCB1                             00000001
+IOCB2                             00000002
+IOCB3                             00000003
+IOCB4                             00000004
+IOCB5                             00000005
+IOCB6                             00000006
+IOCB7                             00000007
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRP                               00000007
+Init_CONVERSION                   00000043
+K                                 00000022
+LCD_Char                          000000CD
+LCD_Clear                         000000E2
+LCD_EN                            PORTC,4
+LCD_GoTo                          00000102
+LCD_Home                          000000F2
+LCD_Init                          00000052
+LCD_RS                            PORTC,5
+LTS                               00000001
+MC1OUT                            00000007
+MC2OUT                            00000006
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+MSK                               00000093
+MSK0                              00000000
+MSK1                              00000001
+MSK2                              00000002
+MSK3                              00000003
+MSK4                              00000004
+MSK5                              00000005
+MSK6                              00000006
+MSK7                              00000007
+MULTI                             00000022
+MULTIPLICATION                    0000014B
+MULTIPLIER                        00000021
+N1                                00000020
+NIBBLE                            00000027
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OERR                              00000001
+OPTION_REG                        00000081
+OSCCON                            0000008F
+OSCTUNE                           00000090
+OSFIE                             00000007
+OSFIF                             00000007
+OSTS                              00000003
+P                                 00000004
+P0W                               00000158
+P1M0                              00000006
+P1M1                              00000007
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PDC0                              00000000
+PDC1                              00000001
+PDC2                              00000002
+PDC3                              00000003
+PDC4                              00000004
+PDC5                              00000005
+PDC6                              00000006
+PEIE                              00000006
+PEN                               00000002
+PIE1                              0000008C
+PIE2                              0000008D
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PORTD                             00000008
+PORTE                             00000009
+POW                               00000025
+POW_RES                           00000023
+PR2                               00000092
+PRSEN                             00000007
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSSAC0                            00000002
+PSSAC1                            00000003
+PSSBD0                            00000000
+PSSBD1                            00000001
+PSTRCON                           0000009D
+PULSR                             00000002
+PULSS                             00000003
+PWM1CON                           0000009B
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RA6                               00000006
+RA7                               00000007
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE 20
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RCEN                              00000003
+RCIDL                             00000006
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+RD0                               00000000
+RD1                               00000001
+RD2                               00000002
+RD3                               00000003
+RD4                               00000004
+RD5                               00000005
+RD6                               00000006
+RD7                               00000007
+RE0                               00000000
+RE1                               00000001
+RE2                               00000002
+RE3                               00000003
+READ_WRITE                        00000002
+RP0                               00000005
+RP1                               00000006
+RSEN                              00000001
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+Ret1                              00000028
+Ret2                              00000029
+S                                 00000003
+SBOREN                            00000004
+SCKP                              00000004
+SCS                               00000000
+SEN                               00000000
+SENDB                             00000003
+SMP                               00000007
+SPBRG                             00000099
+SPBRGH                            0000009A
+SPEN                              00000007
+SR0                               00000006
+SR1                               00000007
+SRCON                             00000185
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPCON2                           00000091
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE 21
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+SSPM3                             00000003
+SSPMSK                            00000093
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+STRA                              00000000
+STRB                              00000001
+STRC                              00000002
+STRD                              00000003
+STRSYNC                           00000004
+SWDTEN                            00000000
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1GINV                            00000007
+T1GIV                             00000007
+T1GSS                             00000001
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TEST                              00000027
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOTAL_POW_RES                     00000026
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE 22
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISA6                            00000006
+TRISA7                            00000007
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRISD                             00000088
+TRISD0                            00000000
+TRISD1                            00000001
+TRISD2                            00000002
+TRISD3                            00000003
+TRISD4                            00000004
+TRISD5                            00000005
+TRISD6                            00000006
+TRISD7                            00000007
+TRISE                             00000089
+TRISE0                            00000000
+TRISE1                            00000001
+TRISE2                            00000002
+TRISE3                            00000003
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TX8_9                             00000006
+TX9                               00000006
+TX9D                              00000000
+TXD8                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE 23
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ULPWUE                            00000005
+ULPWUIE                           00000002
+ULPWUIF                           00000002
+VCFG0                             00000004
+VCFG1                             00000005
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000097
+VREN                              00000007
+VROE                              00000006
+VRR                               00000005
+VRSS                              00000004
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000105
+WDTPS0                            00000001
+WDTPS1                            00000002
+WDTPS2                            00000003
+WDTPS3                            00000004
+WPUB                              00000095
+WPUB0                             00000000
+WPUB1                             00000001
+WPUB2                             00000002
+WPUB3                             00000003
+WPUB4                             00000004
+WPUB5                             00000005
+WPUB6                             00000006
+WPUB7                             00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+WUE                               00000001
+Z                                 00000002
+_BOR21V                           00003EFF
+_BOR40V                           00003FFF
+_BOR4V_BOR21V                     00003EFF
+_BOR4V_BOR40V                     00003FFF
+_BOREN_NSLEEP                     00003EFF
+_BOREN_OFF                        00003CFF
+_BOREN_ON                         00003FFF
+_BOREN_SBODEN                     00003DFF
+_BOR_NSLEEP                       00003EFF
+_BOR_OFF                          00003CFF
+_BOR_ON                           00003FFF
+_BOR_SBODEN                       00003DFF
+_CONFIG1                          00002007
+_CONFIG2                          00002008
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003F7F
+_CP_OFF                           00003FFF
+_CP_ON                            00003FBF
+MPASM 5.82  /HOME/OMARS/MPLABXPROJECTS/PIC16   8-7-2021  13:42:10         PAGE 24
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_DEBUG_OFF                        00003FFF
+_DEBUG_ON                         00001FFF
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC                            00003FFF
+_EXTRCIO                          00003FFE
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FCMEN_OFF                        000037FF
+_FCMEN_ON                         00003FFF
+_FOSC_EC                          00003FFB
+_FOSC_EXTRC_CLKOUT                00003FFF
+_FOSC_EXTRC_NOCLKOUT              00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTRC_CLKOUT                00003FFD
+_FOSC_INTRC_NOCLKOUT              00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_IESO_OFF                         00003BFF
+_IESO_ON                          00003FFF
+_INTOSC                           00003FFD
+_INTOSCIO                         00003FFC
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_LVP_OFF                          00002FFF
+_LVP_ON                           00003FFF
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_WRT_1FOURTH                      00003BFF
+_WRT_256                          00003DFF
+_WRT_HALF                         000039FF
+_WRT_OFF                          00003FFF
+_XT_OSC                           00003FF9
+__16F887                          00000001
+adclecturaH                       00000020
+adclecturaL                       00000021
+
+Errors   :     0
+Warnings :     9 reported,     0 suppressed
+Messages :    16 reported,     0 suppressed
+
+
